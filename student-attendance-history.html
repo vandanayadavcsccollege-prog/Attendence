@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance History</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">CSC</div>
+
+        <div>
+            <h2>Chandrabhan Sharma College</h2>
+            <p>Student Portal</p>
+        </div>
+
+    </div>
+
+    <button onclick="logout()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h3>Student Portal</h3>
+
+        <a href="student-dashboard.html" >
+            🏠 Dashboard
+        </a>
+
+        <a href="student-attendance.html">
+            ✓ My Attendance
+        </a>
+
+        <a href="student-attendance-history.html" class="active"> 
+            📅 Attendance History
+        </a>
+
+        <a href="student-leave.html">
+            📝 Apply Leave
+        </a>
+
+        <a href="student-leave-status.html">
+            📋 Leave Status
+        </a>
+
+        <a href="student-profile.html">
+            👤 My Profile
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <div class="page-heading">
+
+            <span>ATTENDANCE HISTORY</span>
+
+            <h1>Attendance History</h1>
+
+        </div>
+
+<!-- DATE SEARCH -->
+
+<div class="history-search">
+
+    <label for="historyDate">
+        Search Attendance by Date
+    </label>
+
+    <div class="history-search-box">
+
+        <input
+            type="date"
+            id="historyDate"
+        >
+
+        <button
+            type="button"
+            onclick="searchAttendanceByDate()"
+            class="btn primary"
+        >
+            🔍 Search
+        </button>
+
+        <button
+            type="button"
+            onclick="showAllAttendance()"
+            class="btn secondary"
+        >
+            Show All
+        </button>
+
+    </div>
+
+</div>
+        <!-- ATTENDANCE HISTORY WILL APPEAR HERE -->
+
+        <div id="attendanceHistory"></div>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

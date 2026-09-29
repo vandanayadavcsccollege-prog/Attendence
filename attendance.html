@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mark Attendance</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">CSC</div>
+
+        <div>
+            <h2>Chandrabhan Sharma College</h2>
+            <p>Faculty Attendance Panel</p>
+        </div>
+
+    </div>
+
+    <button onclick="logoutUser()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h3>Faculty Panel</h3>
+
+        <a href="faculty-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="attendance.html" class="active">
+            ✓ Mark Attendance
+        </a>
+
+        <a href="students.html">
+            🎓 Students
+        </a>
+
+        <a href="reports.html">
+            📊 Reports
+        </a>
+
+        <a href="leaves.html">
+            📝 Leave Requests
+        </a>
+
+        <a href="statistics.html">
+            📈 Statistics
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="page-heading">
+
+            <span>ATTENDANCE</span>
+
+            <h1>
+                Mark Student Attendance
+            </h1>
+
+            <p>
+                Select class, subject and date.
+            </p>
+
+        </div>
+
+
+        <!-- FILTER -->
+
+        <div class="filter-card">
+
+            <div>
+
+                <label>Class</label>
+
+                <select id="attClass">
+
+                    <option>BSc IT - TY</option>
+                    <option>BSc IT - SY</option>
+                    <option>BSc IT - FY</option>
+                    <option>BCom</option>
+                    <option>BA</option>
+                    <option>BSc</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Subject</label>
+
+                <select id="attSubject">
+
+                    <option>Data Analytics</option>
+                    <option>Java</option>
+                    <option>Web Development</option>
+                    <option>Python</option>
+                    <option>Software Engineering</option>
+                    <option>Computer Networks</option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Date</label>
+
+                <input type="date" id="attDate">
+
+            </div>
+
+        </div>
+
+
+        <!-- STUDENT TABLE -->
+
+        <div class="table-card">
+
+            <div class="table-top">
+
+                <div>
+
+                    <h2>Student List</h2>
+
+                    <p id="attendanceInfo">
+                        Select class, subject and date
+                    </p>
+
+                </div>
+
+                <button
+                    onclick="saveAttendance()"
+                    class="btn primary">
+
+                    💾 Save Attendance
+
+                </button>
+
+            </div>
+
+
+            <!-- JavaScript table yaha banayega -->
+
+            <div id="attendanceTable">
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

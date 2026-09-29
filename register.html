@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Student Account</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="register-page">
+
+    <div class="register-box">
+
+        <h1>Create Student Account</h1>
+
+        <p class="register-subtitle">
+            Register to access your attendance dashboard.
+        </p>
+
+
+        <form id="registerForm">
+
+            <!-- Student Name -->
+            <label for="regName">Student Name</label>
+
+            <input
+                type="text"
+                id="regName"
+                placeholder="Enter full name"
+                required
+            >
+
+
+            <!-- Username -->
+            <label for="regUsername">Username</label>
+
+            <input
+                type="text"
+                id="regUsername"
+                placeholder="Create username"
+                required
+            >
+
+
+            <!-- Email -->
+            <label for="regEmail">Email</label>
+
+            <input
+                type="email"
+                id="regEmail"
+                placeholder="Enter email"
+                required
+            >
+
+
+            <!-- Roll Number -->
+            <label for="regRoll">Roll Number</label>
+
+            <input
+                type="text"
+                id="regRoll"
+                placeholder="Enter roll number"
+                required
+            >
+
+
+            <!-- Class -->
+            <label for="regClass">Class</label>
+
+            <select id="regClass" required>
+
+                <option value="">Select Class</option>
+
+                <option value="BSc IT - TY">BSc IT - TY</option>
+                <option value="BSc IT - SY">BSc IT - SY</option>
+                <option value="BSc IT - FY">BSc IT - FY</option>
+                <option value="BCom">BCom</option>
+                <option value="BA">BA</option>
+                <option value="BSc">BSc</option>
+
+            </select>
+
+
+            <!-- Fixed Password Information -->
+
+            <div class="fixed-password">
+                <strong>Default Password:</strong>
+                Student@123
+            </div>
+
+
+            <!-- Button -->
+
+            <button type="submit" class="register-btn">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p id="registerMessage"></p>
+
+
+        <p class="login-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

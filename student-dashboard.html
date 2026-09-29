@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="dashboard-header">
+
+    <div class="brand">
+        <div class="logo">CSC</div>
+        <div>
+            <h2>Chandrabhan Sharma College</h2>
+            <p>Student Portal</p>
+        </div>
+    </div>
+
+    <button onclick="logout()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+<div class="dashboard-layout">
+
+<aside class="sidebar">
+
+    <h3>Student Portal</h3>
+
+    <a href="student-dashboard.html" class="active">🏠 Dashboard</a>
+    <a href="student-attendance.html">✓ My Attendance</a>
+    <a href="student-attendance-history.html">📅 Attendance History</a>
+    <a href="student-leave.html">📝 Apply Leave</a>
+    <a href="student-leave-status.html">📋 Leave Status</a>
+    <a href="student-profile.html">👤 My Profile</a>
+
+</aside>
+
+<main class="main">
+
+    <div class="student-welcome">
+
+        <div>
+            <span>STUDENT DASHBOARD</span>
+            <h1 id="studentName">Welcome</h1>
+            <p id="studentInfo"></p>
+        </div>
+
+        <div class="student-avatar">🎓</div>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <span>📚</span>
+            <h2 id="totalClasses">0</h2>
+            <p>Total Classes</p>
+        </div>
+
+        <div class="stat-card">
+            <span>✓</span>
+            <h2 id="studentPresent">0</h2>
+            <p>Present</p>
+        </div>
+
+        <div class="stat-card">
+            <span>✕</span>
+            <h2 id="studentAbsent">0</h2>
+            <p>Absent</p>
+        </div>
+
+        <div class="stat-card highlight">
+            <span>📈</span>
+            <h2 id="studentPercentage">0%</h2>
+            <p>Overall Attendance</p>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <h2>Subject-wise Attendance</h2>
+
+        <div id="subjectAttendance"></div>
+
+    </div>
+
+</main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

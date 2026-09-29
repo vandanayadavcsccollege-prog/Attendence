@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Leave Management - Faculty Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">
+            CSC
+        </div>
+
+        <div class="college-info">
+
+            <h2>Chandrabhan Sharma College</h2>
+
+            <p>Faculty Attendance Panel</p>
+
+        </div>
+
+    </div>
+
+
+    <button onclick="logoutUser()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+
+<!-- ================= LAYOUT ================= -->
+
+<div class="dashboard-layout">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>Faculty Panel</h3>
+
+
+        <a href="faculty-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+
+        <a href="attendance.html">
+            ✓ Mark Attendance
+        </a>
+
+
+        <a href="students.html">
+            🎓 Students
+        </a>
+
+
+        <a href="reports.html">
+            📊 Reports
+        </a>
+
+
+        <a href="leaves.html" class="active">
+            📝 Leave Requests
+        </a>
+
+
+        <a href="statistics.html">
+            📈 Statistics
+        </a>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <span>LEAVE MANAGEMENT</span>
+
+            <h1>Student Leave Requests</h1>
+
+            <p>
+                Review and manage student leave applications.
+            </p>
+
+        </section>
+
+
+
+        <!-- ================= LEAVE CARD ================= -->
+
+        <section class="student-list-card">
+
+
+            <div class="student-list-header">
+
+                <div>
+
+                    <span class="section-label">
+                        LEAVE REQUESTS
+                    </span>
+
+                    <h2>Student Applications</h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= LEAVE TABLE ================= -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            <th>Student Name</th>
+                            <th>Username</th>
+                            <th>Class</th>
+                            <th>Leave Date</th>
+                            <th>Reason</th>
+                            <th>Status / Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="facultyLeaves">
+
+                        <!-- JavaScript will load leaves -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

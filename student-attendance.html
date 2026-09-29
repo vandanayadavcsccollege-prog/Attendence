@@ -1,0 +1,75 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>My Attendance</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+ 
+<body> 
+ 
+<header class="dashboard-header"> 
+    <div class="brand"> 
+        <div class="logo">CSC</div> 
+        <div> 
+            <h2>Chandrabhan Sharma College</h2> 
+            <p>Student Portal</p> 
+        </div> 
+    </div> 
+ 
+    <button onclick="logout()" class="logout">
+        Logout
+    </button> 
+</header> 
+ 
+<div class="dashboard-layout"> 
+ 
+<aside class="sidebar"> 
+ 
+    <h3>Student Portal</h3> 
+ 
+    <a href="student-dashboard.html">
+        🏠 Dashboard
+    </a> 
+ 
+    <a href="student-attendance.html" class="active"> 
+        ✓ My Attendance
+    </a> 
+ 
+    <a href="student-attendance-history.html">
+        📅 Attendance History
+    </a> 
+ 
+    <a href="student-leave.html">
+        📝 Apply Leave
+    </a> 
+ 
+    <a href="student-leave-status.html">
+        📋 Leave Status
+    </a> 
+ 
+    <a href="student-profile.html">
+        👤 My Profile
+    </a> 
+ 
+</aside> 
+ 
+<main class="main"> 
+ 
+<div class="page-heading"> 
+ 
+    <span>MY ATTENDANCE</span> 
+ 
+    <h1>Subject-wise Attendance</h1> 
+ 
+</div> 
+ 
+<div id="subjectAttendance"></div> 
+ 
+</main> 
+ 
+</div> 
+ 
+<script src="script.js"></script> 
+ 
+</body> 
+</html>

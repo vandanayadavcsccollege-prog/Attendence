@@ -1,0 +1,92 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Apply Leave</title> 
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+ 
+<body> 
+ 
+<header class="dashboard-header"> 
+ 
+<div class="brand"> 
+    <div class="logo">CSC</div> 
+    <div> 
+        <h2>Chandrabhan Sharma College</h2> 
+        <p>Student Portal</p> 
+    </div> 
+</div> 
+ 
+<button onclick="logout()" class="logout">Logout</button> 
+ 
+</header> 
+ 
+<div class="dashboard-layout"> 
+ 
+<aside class="sidebar"> 
+    <h3>Student Portal</h3> 
+ 
+    <a href="student-dashboard.html">
+        🏠 Dashboard
+    </a> 
+ 
+    <a href="student-attendance.html">
+        ✓ My Attendance
+    </a> 
+ 
+    <a href="student-attendance-history.html">
+        📅 Attendance History
+    </a> 
+ 
+    <a href="student-leave.html" class="active"> 
+        📝 Apply Leave
+    </a> 
+ 
+    <a href="student-leave-status.html">
+        📋 Leave Status
+    </a> 
+ 
+    <a href="student-profile.html">
+        👤 My Profile
+    </a> 
+</aside> 
+ 
+<main class="main"> 
+ 
+<div class="page-heading"> 
+    <span>LEAVE MANAGEMENT</span> 
+    <h1>Apply for Leave</h1> 
+</div> 
+ 
+<div class="form-card"> 
+ 
+<label>Leave Date</label> 
+<input type="date" id="leaveDate"> 
+ 
+<label>Reason</label> 
+<select id="leaveReason"> 
+    <option>Medical</option> 
+    <option>Personal</option> 
+    <option>Family Function</option> 
+    <option>Other</option> 
+</select> 
+ 
+<label>Message</label> 
+<textarea id="leaveMessage" 
+placeholder="Enter reason for leave"></textarea> 
+ 
+<button onclick="applyLeave()" class="btn primary"> 
+    Submit Leave Request 
+</button> 
+ 
+<p id="leaveMessageBox"></p> 
+ 
+</div> 
+ 
+</main> 
+</div> 
+ 
+<script src="script.js"></script> 
+
+</body> 
+</html>

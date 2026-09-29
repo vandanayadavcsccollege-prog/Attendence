@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance Reports - Faculty Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">
+            CSC
+        </div>
+
+        <div class="college-info">
+
+            <h2>Chandrabhan Sharma College</h2>
+
+            <p>Faculty Attendance Panel</p>
+
+        </div>
+
+    </div>
+
+
+    <button onclick="logoutUser()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+
+<!-- ================= LAYOUT ================= -->
+
+<div class="dashboard-layout">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>Faculty Panel</h3>
+
+        <a href="faculty-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="attendance.html">
+            ✓ Mark Attendance
+        </a>
+
+        <a href="students.html">
+            🎓 Students
+        </a>
+
+        <a href="reports.html" class="active">
+            📊 Reports
+        </a>
+
+        <a href="leaves.html">
+            📝 Leave Requests
+        </a>
+
+        <a href="statistics.html">
+            📈 Statistics
+        </a>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <span>ATTENDANCE REPORTS</span>
+
+            <h1>Attendance Reports</h1>
+
+            <p>
+                View subject-wise student attendance records.
+            </p>
+
+        </section>
+
+
+
+        <!-- ================= REPORT CARD ================= -->
+
+        <section class="student-list-card">
+
+
+            <div class="student-list-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ATTENDANCE RECORDS
+                    </span>
+
+                    <h2>Student Attendance Report</h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= CLASS & SUBJECT FILTER ================= -->
+
+<div style="margin: 20px 0; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+
+    <div>
+
+        <label for="reportClass">
+            <strong>Select Class:</strong>
+        </label>
+
+        <select
+            id="reportClass"
+            onchange="updateReportSubjects()"
+            style="padding: 10px; margin-left: 10px;">
+
+            <option value="All">
+                All Classes
+            </option>
+
+            <option value="BSc IT - TY">
+                BSc IT - TY
+            </option>
+
+            <option value="BSc IT - SY">
+                BSc IT - SY
+            </option>
+
+            <option value="BSc IT - FY">
+                BSc IT - FY
+            </option>
+
+            <option value="BCom">
+                BCom
+            </option>
+
+            <option value="BA">
+                BA
+            </option>
+
+            <option value="BSc">
+                BSc
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div>
+
+        <label for="reportSubject">
+            <strong>Select Subject:</strong>
+        </label>
+
+        <select
+            id="reportSubject"
+            onchange="loadReports()"
+            style="padding: 10px; margin-left: 10px;">
+
+            <option value="All">
+                All Subjects
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+
+            <!-- ================= TABLE ================= -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Roll No.</th>
+
+                            <th>Student Name</th>
+
+                            <th>Class</th>
+
+                            <th>Present</th>
+
+                            <th>Absent</th>
+
+                            <th>Total</th>
+
+                            <th>Attendance %</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportsTable">
+
+                        <!-- JavaScript will load report -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="script.js"></script>
+
+
+<script>
+
+// =====================================================
+// CLASS-WISE SUBJECTS
+// =====================================================
+
+const reportSubjects = {
+
+    "BSc IT - TY": [
+        "Data Analytics",
+        "Java",
+        "Web Development",
+        "Python",
+        "Software Engineering",
+        "Computer Networks"
+    ],
+
+    "BSc IT - SY": [
+        "Java",
+        "Python",
+        "Web Development",
+        "Computer Networks"
+    ],
+
+    "BSc IT - FY": [
+        "Python",
+        "Web Development",
+        "Computer Networks"
+    ],
+
+    "BCom": [
+        "Financial Accounting",
+        "Business Economics",
+        "Business Communication",
+        "Business Law"
+    ],
+
+    "BA": [
+        "English",
+        "Economics",
+        "Political Science",
+        "History"
+    ],
+
+    "BSc": [
+        "Physics",
+        "Chemistry",
+        "Mathematics",
+        "Computer Science"
+    ]
+
+};
+
+
+// =====================================================
+// UPDATE SUBJECTS WHEN CLASS CHANGES
+// =====================================================
+
+function updateReportSubjects() {
+
+    const classSelect =
+        document.getElementById("reportClass");
+
+    const subjectSelect =
+        document.getElementById("reportSubject");
+
+    if (!classSelect || !subjectSelect) {
+        return;
+    }
+
+
+    const selectedClass =
+        classSelect.value;
+
+
+    // Clear old subjects
+
+    subjectSelect.innerHTML = "";
+
+
+    // All Subjects option
+
+    const allOption =
+        document.createElement("option");
+
+    allOption.value = "All";
+    allOption.textContent = "All Subjects";
+
+    subjectSelect.appendChild(allOption);
+
+
+    // If All Classes selected
+
+    if (selectedClass === "All") {
+
+        const allSubjects = new Set();
+
+
+        Object.values(reportSubjects).forEach(
+            function(subjectList) {
+
+                subjectList.forEach(
+                    function(subject) {
+
+                        allSubjects.add(subject);
+
+                    }
+                );
+
+            }
+        );
+
+
+        allSubjects.forEach(
+            function(subject) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = subject;
+                option.textContent = subject;
+
+                subjectSelect.appendChild(option);
+
+            }
+        );
+
+    }
+
+
+    // Selected class
+
+    else {
+
+        const subjects =
+            reportSubjects[selectedClass] || [];
+
+
+        subjects.forEach(
+            function(subject) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = subject;
+                option.textContent = subject;
+
+                subjectSelect.appendChild(option);
+
+            }
+        );
+
+    }
+
+
+    // Reload report
+
+    loadReports();
+
+}
+
+
+// =====================================================
+// LOAD REPORTS
+// =====================================================
+
+function loadReports() {
+
+    const students =
+        JSON.parse(
+            localStorage.getItem("students")
+        ) || [];
+
+
+    const table =
+        document.getElementById("reportsTable");
+
+
+    const classSelect =
+        document.getElementById("reportClass");
+
+
+    const subjectSelect =
+        document.getElementById("reportSubject");
+
+
+    if (!table) {
+        return;
+    }
+
+
+    table.innerHTML = "";
+
+
+    const selectedClass =
+        classSelect
+            ? classSelect.value
+            : "All";
+
+
+    const selectedSubject =
+        subjectSelect
+            ? subjectSelect.value
+            : "All";
+
+
+    // =================================================
+    // FILTER STUDENTS BY CLASS
+    // =================================================
+
+    const filteredStudents =
+        students.filter(function(student) {
+
+            if (selectedClass === "All") {
+                return true;
+            }
+
+            return student.class === selectedClass;
+
+        });
+
+
+    // =================================================
+    // NO STUDENTS
+    // =================================================
+
+    if (filteredStudents.length === 0) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="7"
+                    class="no-students">
+
+                    🎓 No students found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+    }
+
+
+    // =================================================
+    // STUDENTS
+    // =================================================
+
+    filteredStudents.forEach(
+        function(student, index) {
+
+
+            let present = 0;
+
+            let absent = 0;
+
+
+            // =================================================
+            // ATTENDANCE
+            // =================================================
+
+            if (student.attendance) {
+
+                Object.keys(
+                    student.attendance
+                ).forEach(function(key) {
+
+
+                    /*
+                        Example:
+
+                        2026-09-18_Data Analytics
+                        2026-09-19_Java
+                        2026-09-20_Financial Accounting
+                    */
+
+
+                    const separator =
+                        key.indexOf("_");
+
+
+                    if (separator === -1) {
+                        return;
+                    }
+
+
+                    const subject =
+                        key.substring(
+                            separator + 1
+                        );
+
+
+                    // =================================================
+                    // ALL SUBJECTS
+                    // =================================================
+
+                    if (
+                        selectedSubject === "All"
+                    ) {
+
+                        if (
+                            student.attendance[key]
+                            === "Present"
+                        ) {
+
+                            present++;
+
+                        }
+
+
+                        if (
+                            student.attendance[key]
+                            === "Absent"
+                        ) {
+
+                            absent++;
+
+                        }
+
+                    }
+
+
+                    // =================================================
+                    // SELECTED SUBJECT
+                    // =================================================
+
+                    else if (
+                        subject === selectedSubject
+                    ) {
+
+                        if (
+                            student.attendance[key]
+                            === "Present"
+                        ) {
+
+                            present++;
+
+                        }
+
+
+                        if (
+                            student.attendance[key]
+                            === "Absent"
+                        ) {
+
+                            absent++;
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+
+            // =================================================
+            // CALCULATE
+            // =================================================
+
+            const total =
+                present + absent;
+
+
+            let percentage = 0;
+
+
+            if (total > 0) {
+
+                percentage =
+                    (
+                        (present / total) * 100
+                    ).toFixed(1);
+
+            }
+
+
+            // =================================================
+            // TABLE ROW
+            // =================================================
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td>
+
+                        ${
+                            student.roll ||
+                            String(index + 1)
+                            .padStart(2, "0")
+                        }
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${student.name || "-"}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${student.class || "-"}
+
+                    </td>
+
+
+                    <td>
+
+                        ${present}
+
+                    </td>
+
+
+                    <td>
+
+                        ${absent}
+
+                    </td>
+
+
+                    <td>
+
+                        ${total}
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${percentage}%
+                        </strong>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// PAGE LOAD
+// =====================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateReportSubjects();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

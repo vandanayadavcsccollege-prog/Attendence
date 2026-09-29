@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Dashboard - Attendance System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">CSC</div>
+
+        <div class="college-info">
+            <h2>Chandrabhan Sharma College</h2>
+            <p>Faculty Attendance Panel</p>
+        </div>
+
+    </div>
+
+    <button onclick="logoutUser()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+<!-- ================= MAIN LAYOUT ================= -->
+
+<div class="dashboard-layout">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>Faculty Panel</h3>
+
+        <a href="faculty-dashboard.html" class="active">
+            🏠 Dashboard
+        </a>
+
+        <a href="attendance.html">
+            ✓ Mark Attendance
+        </a>
+
+        <a href="students.html">
+            🎓 Students
+        </a>
+
+        <a href="reports.html">
+            📊 Reports
+        </a>
+
+        <a href="leaves.html">
+            📝 Leave Requests
+        </a>
+
+        <a href="statistics.html">
+            📈 Statistics
+        </a>
+
+    </aside>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <main class="main">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <span>FACULTY DASHBOARD</span>
+
+            <h1>Welcome, Faculty 👋</h1>
+
+            <p>
+                Manage student attendance and academic records.
+            </p>
+
+        </section>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🎓</div>
+
+                <div>
+                    <h2 id="totalStudents">0</h2>
+                    <p>Total Students</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">✓</div>
+
+                <div>
+                    <h2 id="presentToday">0</h2>
+                    <p>Present Today</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">✕</div>
+
+                <div>
+                    <h2 id="absentToday">0</h2>
+                    <p>Absent Today</p>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📝</div>
+
+                <div>
+                    <h2 id="leaveCount">0</h2>
+                    <p>Leave Requests</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="welcome-card">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="section-label">
+                        QUICK ACCESS
+                    </span>
+
+                    <h2>Quick Actions</h2>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="attendance.html">
+                    <span>✓</span>
+                    <div>
+                        <strong>Mark Attendance</strong>
+                        <small>Record today's attendance</small>
+                    </div>
+                </a>
+
+
+                <a href="students.html">
+                    <span>🎓</span>
+                    <div>
+                        <strong>View Students</strong>
+                        <small>See registered students</small>
+                    </div>
+                </a>
+
+
+                <a href="reports.html">
+                    <span>📊</span>
+                    <div>
+                        <strong>Attendance Reports</strong>
+                        <small>View student reports</small>
+                    </div>
+                </a>
+
+
+                <a href="leaves.html">
+                    <span>📝</span>
+                    <div>
+                        <strong>Leave Requests</strong>
+                        <small>Manage student leaves</small>
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REGISTERED STUDENTS ================= -->
+
+        <section class="student-list-card">
+
+            <div class="student-list-header">
+
+                <div>
+
+                    <span class="section-label">
+                        STUDENT MANAGEMENT
+                    </span>
+
+                    <h2>Registered Students</h2>
+
+                </div>
+
+                <a href="students.html" class="view-all-btn">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Student Name</th>
+                            <th>Username</th>
+                            <th>Class</th>
+                            <th>Email</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="dashboardStudentList">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+<!-- ================= DASHBOARD JAVASCRIPT ================= -->
+
+<script>
+
+function loadFacultyDashboard() {
+
+    const students =
+        JSON.parse(localStorage.getItem("students")) || [];
+
+
+    /* TOTAL STUDENTS */
+
+    document.getElementById("totalStudents").innerText =
+        students.length;
+
+
+    /* STUDENT TABLE */
+
+    const table =
+        document.getElementById("dashboardStudentList");
+
+
+    if (students.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="no-students">
+                    🎓 No students registered yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML = "";
+
+
+    students.forEach(function(student, index) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${student.roll || String(index + 1).padStart(2, "0")}
+                </td>
+
+                <td>
+                    <strong>${student.name}</strong>
+                </td>
+
+                <td>
+                    ${student.username}
+                </td>
+
+                <td>
+                    ${student.class}
+                </td>
+
+                <td>
+                    ${student.email}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* LOAD DASHBOARD */
+
+loadFacultyDashboard();
+
+</script>
+
+
+</body>
+</html>

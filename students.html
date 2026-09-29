@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students - Faculty Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="dashboard-header">
+
+    <div class="brand">
+
+        <div class="logo">
+            CSC
+        </div>
+
+        <div class="college-info">
+            <h2>Chandrabhan Sharma College</h2>
+            <p>Faculty Attendance Panel</p>
+        </div>
+
+    </div>
+
+    <button onclick="logoutUser()" class="logout">
+        Logout
+    </button>
+
+</header>
+
+
+<!-- ================= LAYOUT ================= -->
+
+<div class="dashboard-layout">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <h3>Faculty Panel</h3>
+
+        <a href="faculty-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="attendance.html">
+            ✓ Mark Attendance
+        </a>
+
+        <a href="students.html" class="active">
+            🎓 Students
+        </a>
+
+        <a href="reports.html">
+            📊 Reports
+        </a>
+
+        <a href="leaves.html">
+            📝 Leave Requests
+        </a>
+
+        <a href="statistics.html">
+            📈 Statistics
+        </a>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main">
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading">
+
+            <span>STUDENT MANAGEMENT</span>
+
+            <h1>Registered Students</h1>
+
+            <p>
+                View all students registered in the attendance system.
+            </p>
+
+        </section>
+
+
+        <!-- ================= STUDENT TABLE ================= -->
+
+        <section class="student-list-card">
+
+            <div class="student-list-header">
+
+                <div>
+
+                    <span class="section-label">
+                        STUDENT RECORDS
+                    </span>
+
+                    <h2>All Registered Students</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Student Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Class</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentTableBody">
+
+                        <!-- JavaScript will add students here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script src="script.js"></script>
+
+
+<script>
+
+function loadStudents() {
+
+    const students =
+        JSON.parse(localStorage.getItem("students")) || [];
+
+    const tableBody =
+        document.getElementById("studentTableBody");
+
+
+    tableBody.innerHTML = "";
+
+
+    /* NO STUDENTS */
+
+    if (students.length === 0) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td colspan="5" class="no-students">
+
+                    🎓 No students registered yet.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+    }
+
+
+    /* DISPLAY STUDENTS */
+
+    students.forEach(function(student, index) {
+
+        tableBody.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${student.roll || String(index + 1).padStart(2, "0")}
+                </td>
+
+                <td>
+                    <strong>${student.name}</strong>
+                </td>
+
+                <td>
+                    ${student.username}
+                </td>
+
+                <td>
+                    ${student.email}
+                </td>
+
+                <td>
+                    ${student.class}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* LOAD STUDENTS */
+
+loadStudents();
+
+</script>
+
+
+</body>
+</html>
